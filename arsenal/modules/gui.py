@@ -603,7 +603,7 @@ class ArgslistMenu:
         """
         # init vars and set margins values
         self.height, self.width = stdscr.getmaxyx()
-        self.AB_SIDE = 5
+        self.AB_SIDE = 7
         padding_text_border = 3
         self.max_preview_size = self.width - (2 * self.AB_SIDE) - (2 * padding_text_border)
 
@@ -645,9 +645,9 @@ class ArgslistMenu:
         cmd_pos = 1
         args_pos = border_height + cmd_height + 1
         desc_pos = args_pos + args_height - 1
-        req_pos = desc_pos + desc_height - 1
+        req_pos = desc_pos + desc_height
 
-        nlines = border_height * 2 + cmd_height + args_height + desc_height
+        nlines = border_height * 2 + cmd_height + args_height + desc_height + 1
         if nlines > self.height:
             nlines = self.height
 
@@ -821,7 +821,7 @@ class Gui:
     loaded_menu = False
     with_tags = False
 
-    DEFAULT_RATIOS = {"tags": 10, "access": 6, "title": 6, "name": 20, "description": 58}
+    DEFAULT_RATIOS = {"tags": 10, "access": 8, "title": 7, "name": 20, "description": 55}
 
     def __init__(self):
         self.cheats_menu = None
