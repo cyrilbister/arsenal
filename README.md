@@ -27,19 +27,16 @@ Original Authors:
 Original project is inspired by navi (<https://github.com/denisidoro/navi>).
 
 
-## Arsenal new features
+## Differences with the original projet
 
-![](img/arsenal_update.png)
+![image](https://github.com/user-attachments/assets/f56fd8fd-0851-4b59-979a-1b9e483e38ed)
 
-- New colors
-- Add tmux new pane support (with -t)
-- Add default values in cheatsheets commands with `<argument|default_value>`
-- Support description inside cheatsheets
-- New categories and Tags
-- New cheatsheets
-- Add yml support (thx @0xswitch )
-- Add fzf support with ctrl+t (thx @mgp25)
-- Add prefix to commands generated (with -f)
+- Updated cheatsheet (Work On Progress)
+- Changed tags
+- New tag + indicator on the type of access required to perform the attack 
+- Removed tags from the description inside cheatsheets
+- Added a "requirements" field
+- Small GUI customization
 
 ## Install & Launch
 - with pip :
