@@ -17,11 +17,14 @@ To do that you just have to enter the following command in arsenal:
 >set ip=10.10.10.10
 ``` 
 
-Authors: 
+Fork Author:
+* vee0x0
+
+Original Authors: 
 * Guillaume Muh
 * mayfly
 
-This project is inspired by navi (<https://github.com/denisidoro/navi>) because the original version was in bash and too hard to understand to add features
+Original project is inspired by navi (<https://github.com/denisidoro/navi>).
 
 
 ## Arsenal new features
@@ -170,77 +173,77 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 ## TODO cheatsheets 
 
 ### reverse shell
-- [X] msfvenom
-- [X] php
-- [X] python
-- [X] perl
-- [X] powershell
-- [X] java
-- [X] ruby
+- [ ] msfvenom
+- [ ] php
+- [ ] python
+- [ ] perl
+- [ ] powershell
+- [ ] java
+- [ ] ruby
 
 ### whitebox analysis grep regex
-- [X] php
-- [X] nodejs
-- [X] hash
+- [ ] php
+- [ ] nodejs
+- [ ] hash
 
 ### Tools
 
 #### smb
-- [X] enum4linux 
-- [X] smbmap
+- [ ] enum4linux 
+- [ ] smbmap
 - [ ] smbget     
-- [X] rpcclient
+- [ ] rpcclient
 - [ ] rpcinfo
-- [X] nbtscan
-- [X] impacket
+- [ ] nbtscan
+- [ ] impacket
 
 #### kerberos & AD
-- [X] impacket
-- [X] bloodhound
-- [X] rubeus
+- [ ] impacket
+- [ ] bloodhound
+- [ ] rubeus
 - [ ] powerview
 - [ ] shadow credentials attack
 - [ ] samaccountname attack
 
 #### MITM
-- [X] mitm6
-- [X] responder
+- [ ] mitm6
+- [ ] responder
 
 #### Unserialize
-- [X] ysoserial
+- [ ] ysoserial
 - [ ] ysoserial.net
 
 ### bruteforce & pass cracking
-- [X] hydra
-- [X] hashcat
-- [X] john
+- [ ] hydra
+- [ ] hashcat
+- [ ] john
 
 #### scan
-- [X] nmap
-- [X] eyewitness
-- [X] gowitness
+- [ ] nmap
+- [ ] eyewitness
+- [ ] gowitness
 
 #### fuzz    
-- [X] gobuster
-- [X] ffuf
-- [X] wfuzz
+- [ ] gobuster
+- [ ] ffuf
+- [ ] wfuzz
 
 #### DNS
-- [X] dig
-- [X] dnsrecon
-- [X] dnsenum
-- [X] sublist3r
+- [ ] dig
+- [ ] dnsrecon
+- [ ] dnsenum
+- [ ] sublist3r
 
 #### rpc
 - [ ] rpcbind
 
 #### netbios-ssn
-- [X] snmpwalk
-- [X] snmp-check
-- [X] onesixtyone
+- [ ] snmpwalk
+- [ ] snmp-check
+- [ ] onesixtyone
 
 #### sql
-- [X] sqlmap 
+- [ ] sqlmap 
 
 #### oracle
 - [ ] oscanner
@@ -248,49 +251,49 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] tnscmd10g
 
 #### mysql
-- [X] mysql
+- [ ] mysql
 
 #### nfs
-- [X] showmount
+- [ ] showmount
 
 #### rdp
-- [X] xfreerdp
-- [X] rdesktop
+- [ ] xfreerdp
+- [ ] rdesktop
 - [ ] ncrack
 
 #### mssql
-- [X] sqsh
+- [ ] sqsh
 
 #### winrm
-- [X] evilwinrm
+- [ ] evilwinrm
 
 #### redis
 - [ ] redis-cli
 
 #### postgres
-- [X] psql
+- [ ] psql
 - [ ] pgdump
 
 #### vnc
-- [X] vncviewer
+- [ ] vncviewer
 
 #### x11
-- [X] xspy
-- [X] xwd
-- [X] xwininfo
+- [ ] xspy
+- [ ] xwd
+- [ ] xwininfo
 
 #### ldap
-- [X] ldapsearch
+- [ ] ldapsearch
 
 #### https
 - [ ] sslscan
 
 #### web 
 - [ ] burp
-- [X] nikto
+- [ ] nikto
 - [ ] tplmap
 
 #### app web
-- [X] drupwn
-- [X] wpscan
+- [ ] drupwn
+- [ ] wpscan
 - [ ] nuclei
