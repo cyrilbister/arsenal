@@ -370,3 +370,9 @@ Run a BloodHound data collector.
 ```bash
 cme ldap <dc-ip> -u <user>-p <password> --bloodhound --collection All
 ```
+
+= ip: 192.168.1.0/24
+= dc-ip: $DC_IP
+= user: $USER
+= password: $PASSWORD
+= domain: $DOMAIN
