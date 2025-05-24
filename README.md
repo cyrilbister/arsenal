@@ -51,7 +51,7 @@ arsenal
 
 - manually:
 ```
-git clone https://github.com/Orange-Cyberdefense/arsenal.git
+git clone https://github.com/cyrilbister/arsenal.git
 cd arsenal
 python3 -m pip install -r requirements.txt
 ./run
@@ -60,17 +60,6 @@ python3 -m pip install -r requirements.txt
 Inside your .bashrc or .zshrc add the path to `run` to help you do that you could launch the addalias.sh script
 ```
 ./addalias.sh
-```
-
-- Also if you are an Arch user you can install from the AUR:
-```bash
-git clone https://aur.archlinux.org/arsenal.git
-cd arsenal 
-makepkg -si
-```
-- Or with an AUR helper like yay:
-```bash
-yay -S arsenal
 ```
 
 ## Launch in tmux mode
@@ -201,6 +190,7 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] powerview
 - [ ] shadow credentials attack
 - [ ] samaccountname attack
+- [x] cme/nxc
 
 #### MITM
 - [ ] mitm6
