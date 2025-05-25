@@ -188,7 +188,7 @@ cme ldap <ip> -u <user> -p <password> -M maq
 Check whether LDAP signing and Channel binding are required and / or enforced on the domain.
 
 ```bash
-cme ldap <ip> -u <user> -p <password> -M ldap
+cme ldap <ip> -u <user> -p <password> -M ldaps
 ```
 
 ## LDAP auth (no Kerberos)
