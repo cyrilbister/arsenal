@@ -181,6 +181,7 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] pretender
 - [ ] printnightmare
 - [ ] privexchange
+- [ ] ptsd
 - [ ] pypykatz
 - [ ] responder
 - [ ] rpcclient
@@ -189,12 +190,14 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] sccm
 - [ ] scshell
 - [ ] shadow credentials
+- [ ] sharprdp
 - [ ] wireshark
 - [ ] wsus spoofing
 - [ ] zerologon
 
 #### Linux
-- [ ] enum4linux 
+- [ ] enum4linux
+- [ ] linpeas 
 
 #### AS/400
 - [ ] as-rmtcmd.py
