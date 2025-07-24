@@ -196,7 +196,7 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 #### Linux
 - [ ] enum4linux 
 
-### AS/400
+#### AS/400
 - [ ] as-rmtcmd.py
 - [ ] rexec
 
@@ -215,6 +215,7 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] hydra
 - [ ] hashcat
 - [x] john
+- [ ] kraken
 
 #### Scan
 - [ ] ivre
@@ -290,7 +291,7 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 #### Web 
 - [ ] burp
 - [ ] drupwn
-- [ ] jwttool
+- [ ] jwt_tool
 - [ ] nikto
 - [ ] nuclei
 - [ ] openssl
@@ -300,8 +301,24 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] wpscan
 
 #### Mobile
+- [ ] adb
+- [ ] apktool
 - [ ] frida
 - [ ] mobsf
+- [ ] objection
+
+#### Wi-Fi
+- [ ] aircrack-ng
+- [ ] airmon-ng
+- [ ] airodump-ng
+- [ ] hcx
+- [ ] reaver
+
+#### Cloud
+- [ ] aws-cli
+- [ ] git-secrets
+- [ ] scout
+- [ ] trufflehog
 
 #### Reverse shell
 - [ ] msfvenom
@@ -328,6 +345,7 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] nbtscan
 
 #### C2
-- [ ] sliver
 - [ ] empire
+- [ ] havoc
+- [ ] sliver
 - [ ] gorsh
