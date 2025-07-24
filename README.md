@@ -39,17 +39,6 @@ Original project is inspired by navi (<https://github.com/denisidoro/navi>).
 - Small GUI customization
 
 ## Install & Launch
-- with pip :
-```
-python3 -m pip install arsenal-cli
-```
-
-- run (we also advice you to add this alias : `alias a='arsenal'`)
-```
-arsenal
-```
-
-- manually:
 ```
 git clone https://github.com/cyrilbister/arsenal.git
 cd arsenal
@@ -156,61 +145,86 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - Active directory ACE mindmap
 ![](./mindmap/ACEs_xmind.png)
 
-## TODO cheatsheets 
+## CheatSheets
 
-### reverse shell
-- [ ] msfvenom
-- [ ] php
-- [ ] python
-- [ ] perl
-- [ ] powershell
-- [ ] java
-- [ ] ruby
-
-### whitebox analysis grep regex
-- [ ] php
-- [ ] nodejs
-- [ ] hash
-
-### Tools
-
-#### smb
-- [ ] enum4linux 
-- [ ] smbmap
-- [ ] smbget     
-- [ ] rpcclient
-- [ ] rpcinfo
-- [ ] nbtscan
-- [ ] impacket
-
-#### kerberos & AD
-- [ ] impacket
-- [ ] bloodhound
-- [ ] rubeus
-- [ ] powerview
-- [ ] shadow credentials attack
-- [ ] samaccountname attack
+#### Active Directory / Windows
+- [ ] addspn.py
+- [ ] badsuccessor
+- [ ] (b)ettercap
+- [ ] bloodhound (query library + shadowhound & sharphound & rusthound)
+- [ ] certipy
 - [x] cme/nxc
-
-#### MITM
+- [ ] coercer
+- [ ] coercing techniques
+- [ ] com/dcom
+- [ ] davrelayup
+- [ ] dnstool.py
+- [x] dropthemic
+- [ ] finduncommonshare.py
+- [x] get-gpppassword
+- [ ] gpoditty
+- [ ] impacket
+- [x] impersonate
+- [ ] krbrelayup
+- [ ] krbrelayx.py
+- [ ] laps
+- [ ] ldapsearch
+- [ ] lsassy
+- [ ] ludushound
+- [ ] mimikatz
 - [ ] mitm6
+- [ ] nopac
+- [ ] ntlmrelayx
+- [ ] ouned
+- [ ] powershell
+- [ ] powerview
+- [ ] pretender
+- [ ] printnightmare
+- [ ] privexchange
+- [ ] pypykatz
 - [ ] responder
+- [ ] rpcclient
+- [ ] rubeus
+- [ ] secretsdump
+- [ ] sccm
+- [ ] scshell
+- [ ] shadow credentials
+- [ ] wireshark
+- [ ] wsus spoofing
+- [ ] zerologon
+
+#### Linux
+- [ ] enum4linux 
+
+### AS/400
+- [ ] as-rmtcmd.py
+- [ ] rexec
+
+#### Pivoting
+- [x] ligolo-ng
+- [ ] chisel
+- [ ] socat
+- [ ] ssh
 
 #### Unserialize
 - [ ] ysoserial
 - [ ] ysoserial.net
 
-### bruteforce & pass cracking
+### Bruteforce & pass cracking
+- [ ] crackfiles
 - [ ] hydra
 - [ ] hashcat
-- [ ] john
+- [x] john
 
-#### scan
+#### Scan
+- [ ] ivre
+- [ ] masscan
 - [ ] nmap
+- [ ] rustscan
 - [ ] eyewitness
 - [ ] gowitness
 
-#### fuzz    
+#### Fuzz    
 - [ ] gobuster
 - [ ] ffuf
 - [ ] wfuzz
@@ -221,66 +235,99 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] dnsenum
 - [ ] sublist3r
 
-#### rpc
+#### RPC
 - [ ] rpcbind
 
-#### netbios-ssn
+#### Netbios-ssn
 - [ ] snmpwalk
 - [ ] snmp-check
 - [ ] onesixtyone
 
-#### sql
+#### SQL
 - [ ] sqlmap 
 
-#### oracle
+#### Oracle
 - [ ] oscanner
 - [ ] sqlplus
 - [ ] tnscmd10g
 
-#### mysql
+#### MySQL
 - [ ] mysql
 
-#### nfs
-- [ ] showmount
-
-#### rdp
-- [ ] xfreerdp
-- [ ] rdesktop
-- [ ] ncrack
-
-#### mssql
+#### MSSQL
 - [ ] sqsh
 
-#### winrm
-- [ ] evilwinrm
-
-#### redis
+#### Redis
 - [ ] redis-cli
 
-#### postgres
+#### Postgres
 - [ ] psql
 - [ ] pgdump
 
-#### vnc
+#### MongoDB
+- [ ] mongodb
+      
+#### NFS
+- [ ] showmount
+
+#### RDP
+- [ ] ncrack
+- [ ] remmina
+- [ ] rdesktop
+- [ ] xfreerdp
+
+#### WinRM
+- [ ] evilwinrm
+
+#### VNC
 - [ ] vncviewer
 
-#### x11
+#### X11
 - [ ] xspy
 - [ ] xwd
 - [ ] xwininfo
 
-#### ldap
-- [ ] ldapsearch
-
-#### https
-- [ ] sslscan
-
-#### web 
+#### Web 
 - [ ] burp
-- [ ] nikto
-- [ ] tplmap
-
-#### app web
 - [ ] drupwn
-- [ ] wpscan
+- [ ] jwttool
+- [ ] nikto
 - [ ] nuclei
+- [ ] openssl
+- [ ] sslscan
+- [ ] tomcat
+- [ ] tplmap
+- [ ] wpscan
+
+#### Mobile
+- [ ] frida
+- [ ] mobsf
+
+#### Reverse shell
+- [ ] msfvenom
+- [ ] php
+- [ ] python
+- [ ] perl
+- [ ] powershell
+- [ ] java
+- [ ] ruby
+
+#### Whitebox analysis grep regex
+- [ ] php
+- [ ] nodejs
+- [ ] hash
+
+#### Whitebox static analysis
+- [ ] semgrep
+
+#### SMB
+- [ ] smbmap
+- [ ] smbclient
+- [ ] smbget     
+- [ ] rpcinfo
+- [ ] nbtscan
+
+#### C2
+- [ ] sliver
+- [ ] empire
+- [ ] gorsh
