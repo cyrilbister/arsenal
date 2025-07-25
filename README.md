@@ -148,6 +148,7 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 ## CheatSheets
 
 #### Active Directory / Windows
+- [x] addcomputer
 - [ ] addspn.py
 - [ ] badsuccessor
 - [ ] (b)ettercap
@@ -157,12 +158,13 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] coercer
 - [ ] com/dcom
 - [ ] davrelayup
-- [ ] dnstool.py
+- [x] dementor
+- [x] dnstool.py
+- [x] donpapi
 - [x] dropthemic
 - [ ] finduncommonshare.py
 - [x] get-gpppassword
 - [ ] gpoditty
-- [ ] impacket
 - [x] impersonate
 - [ ] kerberos tickets
 - [ ] krbrelayup
@@ -173,6 +175,7 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] ludushound
 - [ ] mimikatz
 - [ ] mitm6
+- [ ] nauth
 - [ ] nopac
 - [ ] netmandll
 - [ ] ntlmrelayx
@@ -182,13 +185,16 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] powershell
 - [ ] powerview
 - [ ] pretender
+- [x] printerbug
 - [x] printnightmare
 - [ ] privesccheck
 - [ ] privexchange
-- [ ] ptsd
+- [x] ptsd
 - [ ] pypykatz
 - [ ] responder
+- [ ] rpcbind
 - [ ] rpcclient
+- [ ] rpcdump
 - [ ] rubeus
 - [ ] secretsdump
 - [ ] sccm
@@ -242,9 +248,6 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] dnsrecon
 - [ ] dnsenum
 - [ ] sublist3r
-
-#### RPC
-- [ ] rpcbind
 
 #### Netbios-ssn
 - [ ] snmpwalk
