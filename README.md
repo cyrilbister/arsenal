@@ -151,11 +151,10 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] addspn.py
 - [ ] badsuccessor
 - [ ] (b)ettercap
-- [ ] bloodhound (query library + shadowhound & sharphound & rusthound)
+- [ ] bloodhound (+ queries + shadowhound & sharphound & rusthound)
 - [ ] certipy
 - [x] cme/nxc
 - [ ] coercer
-- [ ] coercing techniques
 - [ ] com/dcom
 - [ ] davrelayup
 - [ ] dnstool.py
@@ -165,6 +164,7 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] gpoditty
 - [ ] impacket
 - [x] impersonate
+- [ ] kerberos tickets
 - [ ] krbrelayup
 - [ ] krbrelayx.py
 - [ ] laps
@@ -174,12 +174,16 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] mimikatz
 - [ ] mitm6
 - [ ] nopac
+- [ ] netmandll
 - [ ] ntlmrelayx
 - [ ] ouned
+- [ ] petitpotam
+- [ ] potatoes
 - [ ] powershell
 - [ ] powerview
 - [ ] pretender
-- [ ] printnightmare
+- [x] printnightmare
+- [ ] privesccheck
 - [ ] privexchange
 - [ ] ptsd
 - [ ] pypykatz
@@ -204,7 +208,7 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] rexec
 
 #### Pivoting
-- [x] ligolo-ng
+- [ ] ligolo-ng
 - [ ] chisel
 - [ ] socat
 - [ ] ssh
@@ -215,7 +219,7 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 
 ### Bruteforce & pass cracking
 - [ ] crackfiles
-- [ ] hydra
+- [x] hydra
 - [ ] hashcat
 - [x] john
 - [ ] kraken
@@ -304,7 +308,7 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 - [ ] wpscan
 
 #### Mobile
-- [ ] adb
+- [x] adb
 - [ ] apktool
 - [ ] frida
 - [ ] mobsf
